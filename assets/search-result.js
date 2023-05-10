@@ -3,11 +3,15 @@ var searchInput = document.querySelector("#searchInput");
 var searchBtn = document.querySelector("#searchBtn");
 var searchResult = document.querySelector("#searchResult");
 var day0 = document.querySelector("#day0");
+var notFound = document.querySelector("#notFound");
+var day0Icon = document.querySelector(".day0Icon");
 
 // Initial state
 
 var searchHistory = [];
 var inputValue = "";
+day0.textContent = "";
+notFound.textContent = "";
 
 //day.js test to convert dt = unix
 var dtData = dayjs.unix(1662292800);
@@ -30,14 +34,16 @@ searchBtn.addEventListener("click", function(event)
   location.assign(queryString);
 })
 function getInput(){
-  var inputValue = document.location.search.split('=')[1];
+  inputValue = document.location.search.split('=')[1];
   console.log(inputValue);
 }
 getInput();
 
 
 function generateWeather() {
-  var searchAPI = "api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIkey;
+  var searchAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIkey;
+  console.log(inputValue);
+  console.log(searchAPI);
   fetch(searchAPI)
     .then(function (response) {
       if (!response.ok) {
@@ -46,25 +52,26 @@ function generateWeather() {
 
       return response.json();
     })
-    .then(function (locRes) {
-      // write query to page so user knows what they are viewing
-      resultTextEl.textContent = locRes.search.query;
+    .then(function (data) {
+      console.log(data);
+      // console.log(data[0]);   bad call
+      console.log(data.main);
+      console.log(data.name);
+      console.log(data.main.feels_like);
+      console.log(dayjs.unix(data.dt).format("MM/DD/YYYY"));
 
-      console.log(locRes);
-
-      if (!locRes.results.length) {
-        console.log("City name not recognized");
-        resultContentEl.innerHTML = '<h3>City name was not recognized</h3>';
-      } else {
-        resultContentEl.textContent = '';
-        for (var i = 0; i < locRes.results.length; i++) {
-          printResults(locRes.results[i]);
-        }
-      }
-    })
+      //display results to today
+      day0.textContent = data.name + "(" + dayjs.unix(data.dt).format("MM/DD/YYYY") + ")";
+      day0Icon.innerHTML = "<img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/>";
+      console.log(dayjs.unix(data.dt).format("MM/DD/YYYY"));
+  
+      })
     .catch(function (error) {
       console.error(error);
+      console.log("City name not recognized");
+      notFound.textContent = "City name was not recognized. \nPlease try again.";
     });
+    return;
 }
 generateWeather()
 
