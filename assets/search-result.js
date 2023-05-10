@@ -4,7 +4,11 @@ var searchBtn = document.querySelector("#searchBtn");
 var searchResult = document.querySelector("#searchResult");
 var day0 = document.querySelector("#day0");
 var notFound = document.querySelector("#notFound");
-var day0Icon = document.querySelector(".day0Icon");
+var day0temp = document.querySelector("#day0temp");
+var day0wind = document.querySelector("#day0wind");
+var day0humidity = document.querySelector("#day0humidity");
+
+//var day0Icon = document.querySelector(".day0Icon");
 
 // Initial state
 
@@ -41,7 +45,7 @@ getInput();
 
 
 function generateWeather() {
-  var searchAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIkey;
+  var searchAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIkey + "&units=metric";
   console.log(inputValue);
   console.log(searchAPI);
   fetch(searchAPI)
@@ -61,9 +65,16 @@ function generateWeather() {
       console.log(dayjs.unix(data.dt).format("MM/DD/YYYY"));
 
       //display results to today
-      day0.textContent = data.name + "(" + dayjs.unix(data.dt).format("MM/DD/YYYY") + ")";
-      day0Icon.innerHTML = "<img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/>";
+      var tempC = data.main.temp +String.fromCharCode(176) +"C";
+      var windms = data.wind.speed + "m/s";
+      var humid = data.main.humidity + "%";
+      var day0icon = "<span class=\"day0Icon\"><img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/></span>";
+      day0.innerHTML = data.name + " (" + dayjs.unix(data.dt).format("MM/DD/YYYY") + ")" + day0icon;
       console.log(dayjs.unix(data.dt).format("MM/DD/YYYY"));
+      day0temp.textContent = "Temprature: " + tempC
+      day0wind.textContent = "Wind Speed: " + windms
+      day0humidity.textContent = "Humidity: " + humid
+
   
       })
     .catch(function (error) {
