@@ -66,6 +66,10 @@ event.preventDefault();
 if (currentCity == "") {
    return;
 }
+else if (saveList.includes(currentCity)) {
+  return;
+} 
+
 storeSave();
 displaySave();
 })

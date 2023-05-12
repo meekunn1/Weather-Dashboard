@@ -10,26 +10,27 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 </head>
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
+        <div class="container-fluid p-2 ps-4 background">
+          <h1>Weather Dashboard</h1>
         </div>
-      </nav>
     <div class="d-flex justify-content-center flex-wrap">
-        <div class="card">
-            <p class="intro">Search for a City to show its 5 day weather forecast.</p>
-            <form class="searchBox mb-3">
+        <div class="p-1">
+            <form class="searchBox mb-3 card">
+                <p class="intro p-3">Search City for weather forecast.</p>
                 <input id="searchInput" type="text" class="form-control" placeholder="Example: Irvine">
-                <button id="searchBtn" class="mgn-1">Search</button>
+                <button id="searchBtn" class="m-3">Search</button>
             </form> 
             <div>
-                <button id="saveBtn" class="mgn-side-1">Save Location</button>
-                <ul id="searchHistory"></ul>
+                <button id="saveBtn" class="m-2">Save Location</button>
+                <div class="card">
+                    <p>List of saved Cities</p>
+                    <ul id="searchHistory"></ul>
+                </div>
             </div>
         </div>
-        <div id="searchResult" class="card col-8" style.display="none">
-            <div id="resultToday" class="card d-flex">
-                <h2 id="day0">test day 0<span class="day0Icon"><img src="./assets/icons/unknown.png"/></span></h2>
+        <div id="searchResult" class=" col-8" style.display="none">
+            <div id="resultToday" class="card d-flex m-1">
+                <h2 id="day0" class="mx-3">City Name Here<span class="day0Icon"><img src="./assets/icons/unknown.png"/></span></h2>
                 <span><h3 id="notFound"></h3></span>
                 <ul class="d-flex flex-column mb-3">
                     <il id="day0temp"></il>
@@ -37,9 +38,9 @@
                     <il id="day0humidity"></il>
                 </ul>
             </div>
-            <div>
-                <h3>5-Day Forecast:</h3>
-                <ul class="d-flex align-items-stretch justify-content-between col-sm-12 col-xs-8 flex-wrap">
+            <div class="card m-1">
+                <h3 class="mx-4">5-Day Forecast:</h3>
+                <ul class="d-flex align-items-stretch justify-content-evenly col-sm-12 col-xs-8 flex-wrap">
                     <il class="card"><h4 id="day3">forecast1<span class="day3Icon"><img src="./assets/icons/unknown.png"/></span></h4>
                         <ul class="d-flex flex-column mb-3">
                             <il id="day3temp"></il>

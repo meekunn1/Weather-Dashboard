@@ -1,6 +1,7 @@
 :root {
     --navBackgroundColor: rgb(50, 50, 90);
     --forecastBackgroundColor: darkgrey; 
+    --fontColor: rgba(255, 255, 255, 0.904);
 }
 
 img {
@@ -8,17 +9,11 @@ img {
     height:40px;
 }
 
-.customNavbar {
+.background {
     background-color: var(--navBackgroundColor);
+    color: var(--fontColor);
 }
 
-.pad-1{
-    padding: 10px;
-}
-
-.mgn-1{
-    margin: 10px;
-}
-.mgn-side-1{
-    margin: 0 10px;
+li{
+    list-style: none;
 }
