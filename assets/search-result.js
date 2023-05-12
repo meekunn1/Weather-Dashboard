@@ -33,10 +33,6 @@ function loadSaved() {
 loadSaved();
 displaySave();
 
-//day.js test to convert dt = unix
-var dtData = dayjs.unix(1662292800);
-console.log(dtData.format('MMM D, YYYY'));
-
 
 //submit button to determine input value and start search
 searchBtn.addEventListener("click", function(event)
@@ -133,11 +129,6 @@ function generateWeather() {
     })
     .then(function (data) {
       console.log(data);
-      // console.log(data[0]);   bad call
-      console.log(data.main);
-      console.log(data.name);
-      console.log(data.main.feels_like);
-      console.log(dayjs.unix(data.dt).format("MM/DD/YYYY"));
       currentCity = data.name
       //display results to today
       var tempC = data.main.temp +String.fromCharCode(176) +"C";
@@ -149,16 +140,14 @@ function generateWeather() {
       day0temp.textContent = "Temprature: " + tempC;
       day0wind.textContent = "Wind Speed: " + windms;
       day0humidity.textContent = "Humidity: " + humid;
-  
       })
     .catch(function (error) {
       console.error(error);
-      console.log("City name not recognized");
       notFound.textContent = "City name was not recognized. \nPlease try again.";
     });
     return;
 }
-generateWeather()
+generateWeather();
 
 //generate 5 day forecast
 function generateForecast() {
@@ -175,48 +164,35 @@ function generateForecast() {
     })
     .then(function (data) {
       console.log(data);
-      console.log(data.list);
-      console.log(data.list[1]);
-      console.log(dayjs.unix(data.list[3].dt).format("MM/DD/YYYY - h:mm A"));
-      console.log(dayjs.unix(data.list[11].dt).format("MM/DD/YYYY - h:mm A"));
-      console.log(dayjs.unix(data.list[19].dt).format("MM/DD/YYYY - h:mm A"));
-      console.log(dayjs.unix(data.list[27].dt).format("MM/DD/YYYY - h:mm A"));
-      console.log(dayjs.unix(data.list[35].dt).format("MM/DD/YYYY - h:mm A"));
-
-      // for (var i = 3; i < data.list.length; i + 8) {
-      //   var dayData = data.list[i]
-      //   console.log(dayjs.unix(dayData.dt).format("MM/DD/YYYY - h:mm A"));
-      //   function loadForecast(i){}}
-
       //display forecast day1
       function generateDay1(data){
-      data = data.list[3];
-        var daytempC = data.main.temp +String.fromCharCode(176) +"C";
-        var daywindms = data.wind.speed + "m/s";
-        var dayhumid = data.main.humidity + "%";
-        var dayicon = "<span class=\"day3icon\"><img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/></span>";
-        day3.textContent = dayjs.unix(data.dt).format("MM/DD/YYYY");
-        day3.innerHTML = dayjs.unix(data.dt).format("MM/DD/YYYY") + dayicon;
-        day3temp.textContent = "Temp: " + daytempC
-        day3wind.textContent = "Wind: " + daywindms
-        day3humidity.textContent = "Humidity: " + dayhumid
-        return;
+        data = data.list[3];
+          var daytempC = data.main.temp +String.fromCharCode(176) +"C";
+          var daywindms = data.wind.speed + "m/s";
+          var dayhumid = data.main.humidity + "%";
+          var dayicon = "<span class=\"day3icon\"><img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/></span>";
+          day3.textContent = dayjs.unix(data.dt).format("MM/DD/YYYY");
+          day3.innerHTML = dayjs.unix(data.dt).format("MM/DD/YYYY") + dayicon;
+          day3temp.textContent = "Temp: " + daytempC
+          day3wind.textContent = "Wind: " + daywindms
+          day3humidity.textContent = "Humidity: " + dayhumid
+          return;
       }
       generateDay1(data)
 
       //display forecast day2
       function generateDay2(data){
-      data = data.list[11];
-        var daytempC = data.main.temp +String.fromCharCode(176) +"C";
-        var daywindms = data.wind.speed + "m/s";
-        var dayhumid = data.main.humidity + "%";
-        var dayicon = "<span class=\"day3icon\"><img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/></span>";
-        day11.textContent = dayjs.unix(data.dt).format("MM/DD/YYYY");
-        day11.innerHTML = dayjs.unix(data.dt).format("MM/DD/YYYY") + dayicon;
-        day11temp.textContent = "Temp: " + daytempC
-        day11wind.textContent = "Wind: " + daywindms
-        day11humidity.textContent = "Humidity: " + dayhumid
-        return;
+        data = data.list[11];
+          var daytempC = data.main.temp +String.fromCharCode(176) +"C";
+          var daywindms = data.wind.speed + "m/s";
+          var dayhumid = data.main.humidity + "%";
+          var dayicon = "<span class=\"day3icon\"><img src=\"./assets/icons/" + data.weather[0].icon + ".png\"/></span>";
+          day11.textContent = dayjs.unix(data.dt).format("MM/DD/YYYY");
+          day11.innerHTML = dayjs.unix(data.dt).format("MM/DD/YYYY") + dayicon;
+          day11temp.textContent = "Temp: " + daytempC
+          day11wind.textContent = "Wind: " + daywindms
+          day11humidity.textContent = "Humidity: " + dayhumid
+          return;
       }
       generateDay2(data)
 
@@ -233,8 +209,8 @@ function generateForecast() {
           day19wind.textContent = "Wind: " + daywindms
           day19humidity.textContent = "Humidity: " + dayhumid
           return;
-        }
-        generateDay3(data)
+      }
+      generateDay3(data)
 
       //display forecast day4
       function generateDay4(data){
@@ -249,8 +225,8 @@ function generateForecast() {
           day27wind.textContent = "Wind: " + daywindms
           day27humidity.textContent = "Humidity: " + dayhumid
           return;
-        }
-        generateDay4(data)
+      }
+      generateDay4(data)
 
       //display forecast day3
       function generateDay5(data){
