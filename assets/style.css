@@ -1,4 +1,24 @@
-.day0Icon img {
+:root {
+    --navBackgroundColor: rgb(50, 50, 90);
+    --forecastBackgroundColor: darkgrey; 
+}
+
+img {
     width: 40px;
     height:40px;
+}
+
+.customNavbar {
+    background-color: var(--navBackgroundColor);
+}
+
+.pad-1{
+    padding: 10px;
+}
+
+.mgn-1{
+    margin: 10px;
+}
+.mgn-side-1{
+    margin: 0 10px;
 }
